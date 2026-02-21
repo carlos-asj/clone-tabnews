@@ -31,7 +31,7 @@ function UpdatedAt() {
 }
 
 function Dependencies() {
-  const { isLoading, data, response } = useSWR("/api/v1/status", fetchAPI);
+  const { isLoading, data } = useSWR("/api/v1/status", fetchAPI);
 
   let dependenciesText = "{}";
 
