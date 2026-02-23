@@ -33,17 +33,24 @@ function UpdatedAt() {
 function Dependencies() {
   const { isLoading, data } = useSWR("/api/v1/status", fetchAPI);
 
-  let dependenciesText = "{}";
+  let dependenciesText = "Carregando...";
 
   if (!isLoading && data) {
     dependenciesText = data;
   }
 
   return (
-    <div>
-      <pre>
-        Dependências: {JSON.stringify(dependenciesText.dependencies, null, 2)}
-      </pre>
-    </div>
+    <>
+      <h3>Database</h3>
+      <div>Versão: {dependenciesText.dependencies.database.version}</div>
+      <div>
+        Conexões abertas:{" "}
+        {dependenciesText.dependencies.database.opened_connections}
+      </div>
+      <div>
+        Conexões máximas:{" "}
+        {dependenciesText.dependencies.database.max_connections}
+      </div>
+    </>
   );
 }
