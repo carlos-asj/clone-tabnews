@@ -36,21 +36,23 @@ function Dependencies() {
   let dependenciesText = "Carregando...";
 
   if (!isLoading && data) {
-    dependenciesText = data;
+    dependenciesText = (
+      <>
+        <div>Versão: {data.dependencies.database.version}</div>
+        <div>
+          Conexões abertas: {data.dependencies.database.opened_connections}
+        </div>
+        <div>
+          Conexões máximas: {data.dependencies.database.max_connections}
+        </div>
+      </>
+    );
   }
 
   return (
     <>
       <h3>Database</h3>
-      <div>Versão: {dependenciesText.dependencies.database.version}</div>
-      <div>
-        Conexões abertas:{" "}
-        {dependenciesText.dependencies.database.opened_connections}
-      </div>
-      <div>
-        Conexões máximas:{" "}
-        {dependenciesText.dependencies.database.max_connections}
-      </div>
+      <div>{dependenciesText}</div>
     </>
   );
 }
